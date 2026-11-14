@@ -4,7 +4,7 @@ import { lt } from 'drizzle-orm';
 
 export async function POST(_req: Request) {
   try {
-    const authHeader = req.headers.get('Authorization');
+    const authHeader = _req.headers.get('Authorization');
     const cronSecret = process.env['CRON_SECRET'];
 
     if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
