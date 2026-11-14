@@ -15,9 +15,7 @@ function createDbClient() {
 }
 
 export let db = createDbClient();
-
 export function setDbForTest(client: any) {
   db = client;
 }
-
 export { schema };
