@@ -3,7 +3,7 @@ import { drizzle } from 'drizzle-orm/neon-http';
 import * as schema from './schema.js';
 
 function createDbClient() {
-  const connectionString = process.env['DATABASE_URL';
+  const connectionString = process.env['DATABASE_URL'];
   if (!connectionString) {
     if (process.env['NODE_ENV'] === 'test') {
       return null as unknown as ReturnType<typeof drizzle>;
@@ -14,5 +14,10 @@ function createDbClient() {
   return drizzle({ client: sql, schema });
 }
 
-export const db = createDbClient();
+export let db = createDbClient();
+
+export function setDbForTest(client: any) {
+  db = client;
+}
+
 export { schema };
