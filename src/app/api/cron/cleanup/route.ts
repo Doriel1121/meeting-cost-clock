@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { db, schema } from '@/db/index';
 import { lt } from 'drizzle-orm';
 
-export async function POST(req: Request) {
+export async function POST(_req: Request) {
   try {
     const authHeader = req.headers.get('Authorization');
     const cronSecret = process.env['CRON_SECRET'];

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { db, schema } from '@/db/index';
 import { eq } from 'drizzle-orm';
 
-export async function GET(req: Request, { params }: { params: Promise<{ publicId: string }> }) {
+export async function GET(_req: Request, { params }: { params: Promise<{ publicId: string }> }) {
   try {
     const { publicId } = await params;
 
