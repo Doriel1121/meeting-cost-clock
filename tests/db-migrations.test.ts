@@ -5,8 +5,8 @@ import { migrate } from 'drizzle-orm/pglite/migrator';
 import fs from 'fs';
 import path from 'path';
 
-describe('Database Migrations (AC 1, 3)', () => {
-  it('should apply and rollback the initial schema successfully', async () => {
+describe('Database Migrations', () => {
+  it('should apply and rollback the initial schema successfully (1, 2, 3)', async () => {
     const pglite = new PGlite();
     const db = drizzle(pglite);
     const migrationsFolder = './drizzle';
