@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { migrate } from 'drizzle-orm/pglite/migrator';
-import { setDbForTest, schema } from '@/db/index.js';
-import { GET as GET_SESSION } from '@/app/api/sessions/[publicId]/route.js';
-import { POST as POST_END } from '@/app/api/sessions/[publicId]/end/route.js';
-import { GET as GET_SUMMARY } from '@/app/api/sessions/[publicId]/summary/route.js';
+import { setDbForTest, schema } from '@/db/index';
+import { GET as GET_SESSION } from '@/app/api/sessions/[publicId]/route';
+import { POST as POST_END } from '@/app/api/sessions/[publicId]/end/route';
+import { GET as GET_SUMMARY } from '@/app/api/sessions/[publicId]/summary/route';
 import crypto from 'crypto';
 
 describe('Meeting Session API Integration', () => {

@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { migrate } from 'drizzle-orm/pglite/migrator';
-import { setDbForTest, schema } from '@/db/index.js';
-import { GET } from '@/app/api/presets/route.js';
+import { setDbForTest, schema } from '@/db/index';
+import { GET } from '@/app/api/presets/route';
 
 describe('GET /api/presets', () => {
   beforeEach(async () => {

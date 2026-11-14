@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { db, schema } from '@/db/index.js';
+import { db, schema } from '@/db/index';
 import { eq } from 'drizzle-orm';
-import { formatDuration, formatCurrency } from '@/lib/utils.js';
+import { formatDuration, formatCurrency } from '@/lib/utils';
 
 export async function GET(req: Request, { params }: { params: Promise<{ publicId: string }> }) {
   try {

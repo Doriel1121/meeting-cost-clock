@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import crypto from 'crypto';
-import { db, schema } from '@/db/index.js';
+import { db, schema } from '@/db/index';
 
 const createSessionSchema = z.object({
   attendeeCount: z.number().int().min(1),

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { db } from '../src/db/index.js';
+import { db } from '../src/db/index';
 
 describe('DB Environment Validation (AC 2)', () => {
   it('should throw error when DATABASE_URL is missing', () => {

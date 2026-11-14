@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db, schema } from '@/db/index.js';
+import { db, schema } from '@/db/index';
 import { eq } from 'drizzle-orm';
 import crypto from 'crypto';
 

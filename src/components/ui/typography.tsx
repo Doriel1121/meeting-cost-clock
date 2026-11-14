@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cn } from '@/lib/utils.js';
+import { cn } from '@/lib/utils';
 
 export const TextDisplay = ({ variant = 'body', children, className }: { variant?: 'heading' | 'body' | 'label', children: React.ReactNode, className?: string }) => {
   const classes = {

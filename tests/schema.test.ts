@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { migrate } from 'drizzle-orm/pglite/migrator';
-import { meetingSessions, ratePresets } from '../src/db/schema.js';
+import { meetingSessions, ratePresets } from '../src/db/schema';
 import { sql } from 'drizzle-orm';
 
 describe('Database Schema & Migrations', () => {

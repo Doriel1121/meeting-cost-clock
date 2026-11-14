@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils.js';
+import { cn } from '@/lib/utils';
 
 export const Badge = ({ variant = 'info', children }: { variant?: 'info' | 'success' | 'danger', children: React.ReactNode }) => {
   const variants = {

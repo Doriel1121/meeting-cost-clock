@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { migrate } from 'drizzle-orm/pglite/migrator';
-import { setDbForTest, schema } from '@/db/index.js';
-import { POST } from '@/app/api/cron/cleanup/route.js';
+import { setDbForTest, schema } from '@/db/index';
+import { POST } from '@/app/api/cron/cleanup/route';
 import { sql } from 'drizzle-orm';
 
 describe('POST /api/cron/cleanup', () => {
