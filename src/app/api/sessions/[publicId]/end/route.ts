@@ -1,15 +1,15 @@
-import { NextResponse } from 'next/server';
-import { db, schema } from '@/db/index';
-import { eq } from 'drizzle-orm';
-import crypto from 'crypto';
+import { NextResponse } from "next/server";
+import { db, schema } from "@/db/index";
+import { eq } from "drizzle-orm";
+import crypto from "crypto";
 
 export async function POST(req: Request, { params }: { params: Promise<{ publicId: string }> }) {
   try {
     const { publicId } = await params;
-    const editKey = req.headers.get('X-Edit-Key');
+    const editKey = req.headers.get("X-Edit-Key");
 
     if (!editKey) {
-      return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+      return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
     }
 
     const [session] = await db
@@ -18,16 +18,16 @@ export async function POST(req: Request, { params }: { params: Promise<{ publicI
       .where(eq(schema.meetingSessions.publicId, publicId));
 
     if (!session) {
-      return NextResponse.json({ error: 'SESSION_NOT_FOUND' }, { status: 404 });
+      return NextResponse.json({ error: "SESSION_NOT_FOUND" }, { status: 404 });
     }
 
-    if (session.status === 'ended') {
-      return NextResponse.json({ error: 'SESSION_ALREADY_ENDED' }, { status: 409 });
+    if (session.status === "ended") {
+      return NextResponse.json({ error: "SESSION_ALREADY_ENDED" }, { status: 409 });
     }
 
-    const providedHash = crypto.createHash('sha256').update(editKey).digest('hex');
+    const providedHash = crypto.createHash("sha256").update(editKey).digest("hex");
     if (!crypto.timingSafeEqual(Buffer.from(providedHash), Buffer.from(session.editKeyHash))) {
-      return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+      return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
     }
 
     const now = new Date();
@@ -38,13 +38,17 @@ export async function POST(req: Request, { params }: { params: Promise<{ publicI
     const [updated] = await db
       .update(schema.meetingSessions)
       .set({
-        status: 'ended',
+        status: "ended",
         endedAt: now,
         finalDurationSeconds: diffSeconds,
-        finalTotalCost: totalCost.toString(),
+        finalTotalCost: totalCost.toFixed(2),
       })
       .where(eq(schema.meetingSessions.publicId, publicId))
       .returning();
+
+    if (!updated) {
+      return NextResponse.json({ error: "INTERNAL_SERVER_ERROR" }, { status: 500 });
+    }
 
     return NextResponse.json({
       publicId: updated.publicId,
@@ -53,7 +57,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ publicI
       finalTotalCost: Number(updated.finalTotalCost),
     });
   } catch (error) {
-    console.error('Session end failed:', error);
-    return NextResponse.json({ error: 'INTERNAL_SERVER_ERROR' }, { status: 500 });
+    console.error("Session end failed:", error);
+    return NextResponse.json({ error: "INTERNAL_SERVER_ERROR" }, { status: 500 });
   }
 }
